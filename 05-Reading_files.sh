@@ -37,3 +37,43 @@ grep -E '[aeiou]{5}' /usr/share/dict/words
 
 # EDITING FILES WITH SED
 
+cat ntp.conf
+sed '/^#/d ; /^$/d' ntp.conf
+
+# create a function
+function clean_file {
+    sed -i '/^#/d ; /^$/d' $1
+}
+
+clean_file ntp.conf
+cat ntp.conf
+
+# COMPARING FILES
+
+cat ntp.conf
+cp ntp.conf ntp.new
+echo new >> ntp.new
+
+diff ntp.conf ntp.new
+
+vi ntp.new
+
+diff /etc/ntp.conf ntp.conf
+
+sudo rpm -V ntp
+
+md5sum /usr/bin/passwd # checksum
+md5sum /usr/bin/passwd > server1
+
+# FINDING FILES
+
+find /usr/share/doc -name '*.pdf'
+find /usr/share/doc -name '*.pdf' -exec cp {} . \;
+find -name '*.pdf' -delete
+
+find /etc -maxdepth 1 -type l # Find specific files and delete
+
+df -h /boot
+
+find /boot -size +20000k -type f
+find /boot -size +10000k -type f -exec du -h {} \;
